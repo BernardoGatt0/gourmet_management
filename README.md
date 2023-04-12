@@ -1,1 +1,1 @@
-# gourmet-management
+# Gourmet Management
