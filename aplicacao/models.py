@@ -8,6 +8,7 @@ class Cardapio(models.Model):
     valor = models.FloatField(null=False, blank=False)
     descricao = models.TextField(null=False, blank=False)
     status = models.BooleanField(default=False, blank=False)
+    caminho = models.TextField(max_length=100, null=100, blank=False)
 
 
 class Comanda(models.Model):
