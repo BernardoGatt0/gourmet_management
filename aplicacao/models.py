@@ -2,7 +2,6 @@ from django.db import models
 
 
 class Cardapio(models.Model):
-
     nome = models.CharField(max_length=200, null=False, blank=False)
     ingredientes = models.TextField(null=False, blank=False)
     valor = models.FloatField(null=False, blank=False)
@@ -12,14 +11,12 @@ class Cardapio(models.Model):
 
 
 class Comanda(models.Model):
-
     qrcode = models.TextField(null=False, blank=False)
     caminho = models.CharField(max_length=100, null=False, blank=False)
     total = models.FloatField(null=True, blank=False)
 
 
 class Mesa(models.Model):
-
     qrcode = models.TextField(null=False, blank=False)
     caminho = models.CharField(max_length=100, null=False, blank=False)
 
