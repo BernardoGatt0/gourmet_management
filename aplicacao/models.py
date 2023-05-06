@@ -30,7 +30,3 @@ class Pedido(models.Model):
     comanda = models.ForeignKey(Comanda, on_delete=models.CASCADE)
     mesa = models.ForeignKey(Mesa, on_delete=models.CASCADE)
     status = models.TextField(max_length=100, null=False, blank=False)
-
-
-
-
