@@ -7,15 +7,18 @@ class CardapioSerializers(serializers.ModelSerializer):
         model = Cardapio
         fields = '__all__'
 
+
 class MesaSerializers(serializers.ModelSerializer):
     class Meta:
         model = Mesa
         fields = '__all__'
 
+
 class ComandaSerializers(serializers.ModelSerializer):
     class Meta:
         model = Comanda
         fields = '__all__'
+
 
 class PedidoSerializers(serializers.ModelSerializer):
     class Meta:
