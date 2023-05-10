@@ -39,8 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'aplicacao.apps.AplicacaoConfig',
     'rest_framework',
+    'drf_spectacular',
+
+    # Local
+    'aplicacao.apps.AplicacaoConfig',
     'usuario',
 ]
 
@@ -90,7 +93,15 @@ DATABASES = {
     }
 }
 
+REST_FRAMEWORK = {
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema"
+}
 
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Gourmet Management API',
+    'DESCRIPTION': 'API para gerenciamento de restaurantes',
+    'VERSION': '1.0.0',
+}
 
 
 # Password validation
