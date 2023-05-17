@@ -18,7 +18,8 @@ class Comanda(models.Model):
     id = models.AutoField(primary_key=True)
     qrcode = models.TextField(null=False, blank=False)
     caminho = models.CharField(max_length=100, null=False, blank=False)
-    total = models.FloatField(null=True, blank=False)
+    total = models.FloatField(null=True, blank=False, default=0.0)
+    identificador = models.CharField(max_length=200, null=False, blank=False)
 
     def __str__(self):
         return str(self.id)
@@ -28,6 +29,7 @@ class Mesa(models.Model):
     id = models.AutoField(primary_key=True)
     qrcode = models.TextField(null=False, blank=False)
     caminho = models.CharField(max_length=100, null=False, blank=False)
+    identificador = models.CharField(max_length=200, null=False, blank=False)
 
     def __str__(self):
         return str(self.id)

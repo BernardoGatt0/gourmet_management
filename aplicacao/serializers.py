@@ -15,6 +15,8 @@ class MesaSerializers(serializers.ModelSerializer):
 
 
 class ComandaSerializers(serializers.ModelSerializer):
+    total = serializers.FloatField(default=0.0)
+
     class Meta:
         model = Comanda
         fields = '__all__'
