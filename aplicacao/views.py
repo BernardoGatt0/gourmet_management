@@ -2,17 +2,38 @@ import os
 import uuid
 
 import qrcode
+from django.conf import settings
+from django.http import FileResponse
 from rest_framework import viewsets
-from rest_framework.decorators import action
+from rest_framework.decorators import action, api_view
 from rest_framework.response import Response
-
-from config.settings import BASE_DIR
+from drf_spectacular.utils import extend_schema
+from drf_spectacular.types import OpenApiTypes
 
 from .models import Cardapio, Comanda, Mesa, Pedido
 from .serializers import (CardapioSerializers, ComandaSerializers,
                           MesaSerializers, PedidoSerializers)
 
-URL = 'www.url.com.br'
+URL = 'localhost:8000'
+
+
+@extend_schema(
+    description="Retorna uma imagem de acordo com a pasta e o nome da imagem",
+    request=OpenApiTypes.STR, responses=OpenApiTypes.BYTE
+)
+@api_view(['GET'])
+def image_view(request, pasta, nome_imagem):
+    if pasta == 'comanda':
+        image_path = os.path.join(settings.COMANDA_ROOT, nome_imagem)
+    elif pasta == 'mesa':
+        image_path = os.path.join(settings.MESA_ROOT, nome_imagem)
+    else:
+        return Response({"message": "Pasta não encontrada"}, status=404)
+
+    if os.path.exists(image_path):
+        return FileResponse(open(image_path, 'rb'), content_type='image/jpeg')
+    else:
+        return Response({"message": "Imagem não encontrada"}, status=404)
 
 
 class CardapioViewSet(viewsets.ModelViewSet):
@@ -82,7 +103,7 @@ class MesaViewSet(viewsets.ModelViewSet):
             serializer = MesaSerializers(data={
                 "identificador": str(identificador),
                 "qrcode": f'{URL}/mesa/{identificador}',
-                "caminho": f'{BASE_DIR}/media/mesa/{identificador}.png'
+                "caminho": f'mesa/{identificador}.png'
             })
             serializer.is_valid(raise_exception=True)
             serializer.save()
@@ -100,7 +121,7 @@ class MesaViewSet(viewsets.ModelViewSet):
                                 status=404)
 
             mesa.delete()
-            os.remove(mesa.caminho)
+            os.remove(f'media/{mesa.caminho}')
 
             return Response({"message": "Mesa deletada com sucesso"},
                             status=204)
@@ -146,7 +167,7 @@ class ComandaViewSet(viewsets.ModelViewSet):
             serializer = ComandaSerializers(data={
                 "identificador": str(identificador),
                 "qrcode": f'{URL}/comanda/{identificador}',
-                "caminho": f'{BASE_DIR}/media/comanda/{identificador}.png'
+                "caminho": f'/comanda/{identificador}.png'
             })
             serializer.is_valid(raise_exception=True)
             serializer.save()
@@ -164,7 +185,7 @@ class ComandaViewSet(viewsets.ModelViewSet):
                                 status=404)
 
             comanda.delete()
-            os.remove(comanda.caminho)
+            os.remove(f'media/{comanda.caminho}')
 
             return Response({"message": "Comanda deletada com sucesso"},
                             status=204)
