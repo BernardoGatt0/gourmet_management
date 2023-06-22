@@ -41,6 +41,7 @@ class Pedido(models.Model):
     comanda = models.ForeignKey(Comanda, on_delete=models.CASCADE)
     mesa = models.ForeignKey(Mesa, on_delete=models.CASCADE)
     status = models.TextField(max_length=100, null=False, blank=False)
+    quantidade = models.IntegerField(null=False, blank=False, default=1)
 
     def __str__(self):
         return str(self.id)

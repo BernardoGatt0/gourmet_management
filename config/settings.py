@@ -20,6 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent.as_posix()
 
 COMANDA_ROOT = os.path.join(BASE_DIR, 'media/comanda')
 MESA_ROOT = os.path.join(BASE_DIR, 'media/mesa')
+CARDAPIO_ROOT = os.path.join(BASE_DIR, 'media/cardapio')
 
 
 # Quick-start development settings - unsuitable for production
@@ -65,8 +66,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'config.urls'
-CORS_ALLOW_ALL_ORIGINS= True
-CORS_ALLOW_CREDENTIALS= True
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
 
 TEMPLATES = [
     {

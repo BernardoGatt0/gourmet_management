@@ -3,6 +3,7 @@ from .models import Cardapio, Mesa, Comanda, Pedido
 
 
 class CardapioSerializers(serializers.ModelSerializer):
+
     class Meta:
         model = Cardapio
         fields = '__all__'
