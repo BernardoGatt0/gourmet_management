@@ -8,6 +8,7 @@ from rest_framework import viewsets
 from rest_framework.decorators import action, api_view
 from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from drf_spectacular.utils import extend_schema
 from drf_spectacular.types import OpenApiTypes
 
@@ -44,6 +45,7 @@ class CardapioViewSet(viewsets.ModelViewSet):
     serializer_class = CardapioSerializers
     parser_classes = (MultiPartParser, FormParser, JSONParser,)
     http_method_names = ['post', 'get', 'delete', 'put']
+    permission_classes = (IsAuthenticatedOrReadOnly,)
 
     @action(methods=['get'], detail=False, url_path='buscar/(?P<nome>.+)')
     def buscar(self, request, nome=None):
@@ -155,6 +157,7 @@ class MesaViewSet(viewsets.ModelViewSet):
     queryset = Mesa.objects.all()
     serializer_class = MesaSerializers
     http_method_names = ['post', 'get', 'delete']
+    permission_classes = (IsAuthenticatedOrReadOnly,)
 
     @action(
         methods=['get'], detail=False, url_path='buscar/(?P<identificador>.+)'
@@ -218,6 +221,7 @@ class ComandaViewSet(viewsets.ModelViewSet):
     queryset = Comanda.objects.all()
     serializer_class = ComandaSerializers
     http_method_names = ['post', 'get', 'delete', 'patch']
+    permission_classes = (IsAuthenticatedOrReadOnly,)
 
     @action(
         methods=['get'], detail=False, url_path='buscar/(?P<identificador>.+)'
