@@ -63,7 +63,7 @@ Access the API in your browser at http://localhost:8000/ or through an API clien
 - `/mesa` : GET (list all resources) and POST (create a new resource).
 - `/comanda` : GET (list all resources) and POST (create a new resource).
 - `/pedido` : GET (list all resources) and POST (create a new resource).
-- `/media/{id}` : GET (retrieve a resource by ID).
+- `/media/{pasta}/{id}` : GET (retrieve a resource by ID).
 
 ## Authentication and Permissions
 
